@@ -9,6 +9,8 @@ namespace EjC.AssemblyStructureTests
     /// <summary>
     /// It is not possible for Fakes to create a Stub or Shim for
     /// <see cref="System.Reflection.AssemblyName"/>.
+    /// These tests show how a concrete version of <see cref="System.Reflection.AssemblyName"/>
+    /// can be used in tests.
     /// </summary>
     [TestClass]
     public class AssemblyNameTests

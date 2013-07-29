@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,14 +9,17 @@ namespace EjC.AssemblyStructure
 {
     public class AssemblyDependencies : IAssemblyDependencies
     {
-        public void Analyse(System.Reflection.Assembly assembly)
+        Assembly _assembly;
+
+        public void Analyse(Assembly assembly)
         {
             if (assembly == null) throw new ArgumentNullException("assembly");
+            _assembly = assembly;
         }
 
         public IEnumerable<string> DirectDependencies
         {
-            get { return new List<string>(); }
+            get { return _assembly.GetReferencedAssemblies().Select(an => an.Name); }
         }
     }
 }

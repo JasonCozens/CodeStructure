@@ -26,5 +26,24 @@ namespace EjC.AssemblyStructureTests
             // Assert
             Assert.AreEqual(0, assemblyDepencies.DirectDependencies.ToArray().Count());
         }
+
+        [TestMethod]
+        public void Analyse_AssemblyWithOneReference_HasOneDirectDependency()
+        {
+            // Arrange
+            var name = "EjC.Tests.Assembly01";
+            var refencedassembly = new AssemblyName(name + ", Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+            Assembly assembly = new StubAssembly()
+            {
+                GetReferencedAssemblies01 = () => new AssemblyName[] { refencedassembly }
+            };
+            IAssemblyDependencies assemblyDepencies = new AssemblyDependencies();
+            // Act
+            assemblyDepencies.Analyse(assembly);
+            var dependencies = assemblyDepencies.DirectDependencies.ToArray();
+            // Assert
+            Assert.AreEqual(1, dependencies.Count());
+            Assert.AreEqual(name, dependencies[0]);
+        }
     }
 }
