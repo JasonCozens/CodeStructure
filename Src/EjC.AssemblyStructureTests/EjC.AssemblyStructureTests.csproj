@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="AssemblyDependenciesTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AssemblyNameTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\System.fakes" />
