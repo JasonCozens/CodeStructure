@@ -61,6 +61,7 @@
     <Compile Include="AssemblyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssemblyNameTests.cs" />
+    <Compile Include="VertexTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Fakes Include="Fakes\System.fakes" />
