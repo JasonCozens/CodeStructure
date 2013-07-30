@@ -10,7 +10,7 @@ using EjC.AssemblyStructure;
 namespace EjC.AssemblyStructureTests
 {
     /// <summary>
-    /// Summary description for AssemblyDepenciesTests
+    /// Tests for the AssemblyDependencies class.
     /// </summary>
     [TestClass]
     public class AssemblyDependenciesTests
