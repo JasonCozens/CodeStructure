@@ -58,6 +58,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AssemblyDependenciesTests.cs" />
+    <Compile Include="AssemblyLoaderTests.cs" />
     <Compile Include="AssemblyTests.cs" />
     <Compile Include="ConcurrentBagTests.cs" />
     <Compile Include="GraphTests.cs" />
