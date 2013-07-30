@@ -20,5 +20,16 @@ namespace EjC.AssemblyStructureTests
             Assert.AreEqual(0, graph.Nodes.Count());
             Assert.AreEqual(0, graph.Vertices.Count());
         }
+
+        [TestMethod]
+        public void AddVertices_NoChildren_ParentIsAddedAsNode()
+        {
+            IGraph<string> graph = new Graph<string>();
+            // Act
+            graph.AddVertices("Parent", new List<string>());
+            // Assert
+            Assert.AreEqual(1, graph.Nodes.Count());
+            Assert.AreEqual(0, graph.Vertices.Count());
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace EjC.AssemblyStructure
 
         public void AddVertices(T parent, IEnumerable<T> children)
         {
-            throw new NotImplementedException();
+            _graph.AddOrUpdate(parent, parent, (k, v) => parent);
         }
 
         public IEnumerable<T> Nodes
@@ -28,7 +28,9 @@ namespace EjC.AssemblyStructure
 
         public IEnumerable<IVertex<T>> Vertices
         {
-            get { return _graph.Select(v => new Vertex<T>(v.Key, v.Value)); }
+            get { return _graph.
+                Where(v => !v.Key.Equals(v.Value)).
+                Select(v => new Vertex<T>(v.Key, v.Value)); }
         }
     }
 }
