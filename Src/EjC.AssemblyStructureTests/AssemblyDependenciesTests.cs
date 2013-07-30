@@ -19,12 +19,16 @@ namespace EjC.AssemblyStructureTests
         public void Analyse_AssemblyWithNoReferencies_HasNoDirectDependencies()
         {
             // Arrange
-            Assembly assembly = new StubAssembly();
+            Assembly assembly = new StubAssembly()
+            {
+                GetReferencedAssemblies01 = () => new AssemblyName[] { }
+            };
             IAssemblyDependencies assemblyDepencies = new AssemblyDependencies();
             // Act
             assemblyDepencies.Analyse(assembly);
+            var dependencies = assemblyDepencies.DirectDependencies.ToArray();
             // Assert
-            Assert.AreEqual(0, assemblyDepencies.DirectDependencies.ToArray().Count());
+            Assert.AreEqual(0, dependencies.Count());
         }
 
         [TestMethod]
