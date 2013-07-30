@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyDependencies.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="IAssemblyDependencies.cs" />
     <Compile Include="IGraph.cs" />
     <Compile Include="IVertex.cs" />
