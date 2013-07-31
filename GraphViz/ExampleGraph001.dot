@@ -1,0 +1,10 @@
+digraph g {
+  "EjC.Assembly01";
+  "EjC.Assembly02";
+  "EjC.Assembly03";
+  "EjC.Assembly04";
+  "EjC.Assembly01" -> "EjC.Assembly02";
+  "EjC.Assembly01" -> "EjC.Assembly03";
+  "EjC.Assembly02" -> "EjC.Assembly03";
+  "EjC.Assembly03" -> "EjC.Assembly04";
+}

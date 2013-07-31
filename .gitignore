@@ -154,3 +154,8 @@ $RECYCLE.BIN/
 # Fakes output
 # =========================
 FakesAssemblies/
+
+# =========================
+# Hide svg files.
+# =========================
+*.svg
