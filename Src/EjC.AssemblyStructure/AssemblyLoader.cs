@@ -15,16 +15,12 @@ namespace EjC.AssemblyStructure
         public void RefeflectionOnly(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
-
+            _assembly = null;
             try
             {
                 _assembly = Assembly.ReflectionOnlyLoad(name);
-                AssemblyLoaded = true;
             }
-            catch (FileNotFoundException)
-            {
-                AssemblyLoaded = false;
-            }
+            catch (FileNotFoundException) { }
         }
 
         public System.Reflection.Assembly Assembly
@@ -35,6 +31,8 @@ namespace EjC.AssemblyStructure
             }
         }
 
-        public bool AssemblyLoaded { get; private set; }
+        public bool AssemblyLoaded {
+            get { return _assembly != null; }
+       } 
     }
 }
