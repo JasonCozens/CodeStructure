@@ -43,5 +43,22 @@ namespace EjC.AssemblyStructureTests
             }
             catch (InvalidOperationException) { }
         }
+
+        /// <summary>
+        /// It is necessary to use a real assembly here as it is not posssible
+        /// to Shim Assembly and call the static method ReflectionOnlyLoad.
+        /// </summary>
+        [TestMethod]
+        public void ReflectiionLoad_AssemblyLoaded()
+        {
+            // Arrange.
+            IAssemblyLoader assemblyLoader = new AssemblyLoader();
+            var name = Assembly.GetExecutingAssembly().GetName().Name;
+            // Act
+            assemblyLoader.RefeflectionOnly(name);
+            // Assert
+            Assert.AreEqual(true, assemblyLoader.AssemblyLoaded);
+            Assert.IsNotNull(assemblyLoader.Assembly);
+        }
     }
 }

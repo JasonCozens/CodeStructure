@@ -10,13 +10,16 @@ namespace EjC.AssemblyStructure
 {
     public class AssemblyLoader : IAssemblyLoader
     {
+        private Assembly _assembly;
+
         public void RefeflectionOnly(string name)
         {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
 
             try
             {
-                Assembly.ReflectionOnlyLoad(name);
+                _assembly = Assembly.ReflectionOnlyLoad(name);
+                AssemblyLoaded = true;
             }
             catch (FileNotFoundException)
             {
@@ -27,7 +30,7 @@ namespace EjC.AssemblyStructure
         public System.Reflection.Assembly Assembly
         {
             get { 
-                if (AssemblyLoaded) return null;
+                if (AssemblyLoaded) return _assembly;
                 throw new InvalidOperationException("No assembly loaded");
             }
         }
