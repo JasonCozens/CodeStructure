@@ -29,7 +29,24 @@ namespace EjC.AssemblyStructureTests
             graph.AddVertices("Parent", new List<string>());
             // Assert
             Assert.AreEqual(1, graph.Nodes.Count());
+            Assert.AreEqual("Parent", graph.Nodes.First());
             Assert.AreEqual(0, graph.Vertices.Count());
+        }
+
+        [TestMethod]
+        public void AddVertices_OneChild_NodesAndVerticesAreCorrect()
+        {
+            IGraph<string> graph = new Graph<string>();
+            // Act
+            graph.AddVertices("Parent", new List<string>() { "Child" } );
+            // Assert
+            Assert.AreEqual(2, graph.Nodes.Count());
+            Assert.IsTrue(graph.Nodes.Contains("Parent"));
+            Assert.IsTrue(graph.Nodes.Contains("Child"));
+            var vertex = graph.Vertices.First();
+            Assert.AreEqual(1, graph.Vertices.Count());
+            Assert.AreEqual("Parent", vertex.Parent);
+            Assert.AreEqual("Child", vertex.Child);
         }
     }
 }

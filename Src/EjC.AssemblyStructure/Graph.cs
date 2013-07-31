@@ -9,28 +9,28 @@ namespace EjC.AssemblyStructure
 {
     public class Graph<T> : IGraph<T>
     {
-        ConcurrentDictionary<T, T> _graph;
+        private ConcurrentBag<Vertex<T>> _graph;
 
         public Graph()
         {
-            _graph = new ConcurrentDictionary<T, T>();
+            _graph = new ConcurrentBag<Vertex<T>>();
         }
 
         public void AddVertices(T parent, IEnumerable<T> children)
         {
-            _graph.AddOrUpdate(parent, parent, (k, v) => parent);
+            _graph.Add(new Vertex<T>(parent, parent));
+            foreach(var child in children)
+                _graph.Add(new Vertex<T>(parent, child));
         }
 
         public IEnumerable<T> Nodes
         {
-            get { return _graph.Keys; }
+            get { return  _graph.Select(v => v.Parent).Union(_graph.Select(v => v.Child)); }
         }
 
         public IEnumerable<IVertex<T>> Vertices
         {
-            get { return _graph.
-                Where(v => !v.Key.Equals(v.Value)).
-                Select(v => new Vertex<T>(v.Key, v.Value)); }
+            get { return _graph.Where(v => !(v.Parent.Equals(v.Child))); }
         }
     }
 }
