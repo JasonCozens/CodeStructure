@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EjC.AssemblyStructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -18,10 +19,34 @@ namespace EjC.CodeStructure.AD
             var assembly = Assembly.ReflectionOnlyLoad(assemblyName);
             var assemblyDependencies = new EjC.AssemblyStructure.AssemblyDependencies();
             assemblyDependencies.Analyse(assembly);
-            Console.WriteLine(assembly.FullName);
+            Console.WriteLine(assembly.GetName().Name);
+            PrintDependencies(assemblyDependencies);
             foreach (var dependency in assemblyDependencies.DirectDependencies)
             {
-                Console.WriteLine(dependency);
+                var assemblyLoader = new AssemblyLoader();
+                assemblyLoader.RefeflectionOnly(dependency);
+                Console.WriteLine(assemblyLoader.Name);
+                if (assemblyLoader.AssemblyLoaded)
+                {
+                    assembly = assemblyLoader.Assembly;
+                    assemblyDependencies.Analyse(assemblyLoader.Assembly);
+                    PrintDependencies(assemblyDependencies);
+                }
+                else
+                {
+                    Console.WriteLine("    Assembly failed to load");
+                }
+            }
+            Console.ReadLine();
+        }
+
+
+
+        private static void PrintDependencies(AssemblyStructure.AssemblyDependencies assemblyDependencies)
+        {
+            foreach (var dependency in assemblyDependencies.DirectDependencies)
+            {
+                Console.WriteLine("    {0}", dependency);
             }
         }
     }
