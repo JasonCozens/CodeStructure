@@ -35,6 +35,7 @@ namespace EjC.AssemblyStructureTests
             // Act
             assemblyLoader.RefeflectionOnly("XXX");
             // Assert
+            Assert.AreEqual("XXX", assemblyLoader.Name);
             Assert.AreEqual(false, assemblyLoader.AssemblyLoaded);
             try
             {
@@ -57,6 +58,7 @@ namespace EjC.AssemblyStructureTests
             // Act
             assemblyLoader.RefeflectionOnly(name);
             // Assert
+            Assert.AreEqual(name, assemblyLoader.Name);
             Assert.AreEqual(true, assemblyLoader.AssemblyLoaded);
             Assert.IsNotNull(assemblyLoader.Assembly);
         }

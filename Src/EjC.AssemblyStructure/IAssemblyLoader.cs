@@ -11,6 +11,8 @@ namespace EjC.AssemblyStructure
     {
         void RefeflectionOnly(string name);
 
+        string Name { get; }
+
         bool AssemblyLoaded { get; }
 
         Assembly Assembly { get; }
