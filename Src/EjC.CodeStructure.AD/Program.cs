@@ -16,19 +16,21 @@ namespace EjC.CodeStructure.AD
         static void Main(string[] args)
         {
             var assemblyName = args[0];
-            var assembly = Assembly.ReflectionOnlyLoad(assemblyName);
-            var assemblyDependencies = new EjC.AssemblyStructure.AssemblyDependencies();
-            assemblyDependencies.Analyse(assembly);
-            Console.WriteLine(assembly.GetName().Name);
+            var assemblyLoader = new AssemblyLoader();
+            var assemblyDependencies = new AssemblyDependencies();
+
+
+            assemblyLoader.RefeflectionOnly(assemblyName);
+            assemblyDependencies.Analyse(assemblyLoader.Assembly);
+            Console.WriteLine(assemblyName);
             PrintDependencies(assemblyDependencies);
             foreach (var dependency in assemblyDependencies.DirectDependencies)
             {
-                var assemblyLoader = new AssemblyLoader();
                 assemblyLoader.RefeflectionOnly(dependency);
                 Console.WriteLine(assemblyLoader.Name);
                 if (assemblyLoader.AssemblyLoaded)
                 {
-                    assembly = assemblyLoader.Assembly;
+                    //assembly = assemblyLoader.Assembly;
                     assemblyDependencies.Analyse(assemblyLoader.Assembly);
                     PrintDependencies(assemblyDependencies);
                 }
@@ -40,9 +42,7 @@ namespace EjC.CodeStructure.AD
             Console.ReadLine();
         }
 
-
-
-        private static void PrintDependencies(AssemblyStructure.AssemblyDependencies assemblyDependencies)
+        private static void PrintDependencies(AssemblyDependencies assemblyDependencies)
         {
             foreach (var dependency in assemblyDependencies.DirectDependencies)
             {
