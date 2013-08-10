@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EjC.CodeStructure.AD
 {
     /// <summary>
-    /// Simple console app to display an assemblies dependencies.
+    /// Simple console app to display an assembly's dependencies.
     /// </summary>
     class Program
     {
@@ -18,27 +18,26 @@ namespace EjC.CodeStructure.AD
             var assemblyName = args[0];
             var assemblyLoader = new AssemblyLoader();
             var assemblyDependencies = new AssemblyDependencies();
-
+            IGraph<string> graph = new Graph<string>();
 
             assemblyLoader.RefeflectionOnly(assemblyName);
             assemblyDependencies.Analyse(assemblyLoader.Assembly);
-            Console.WriteLine(assemblyName);
-            PrintDependencies(assemblyDependencies);
+            graph.AddVertices(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
             foreach (var dependency in assemblyDependencies.DirectDependencies)
             {
                 assemblyLoader.RefeflectionOnly(dependency);
-                Console.WriteLine(assemblyLoader.Name);
                 if (assemblyLoader.AssemblyLoaded)
                 {
-                    //assembly = assemblyLoader.Assembly;
                     assemblyDependencies.Analyse(assemblyLoader.Assembly);
-                    PrintDependencies(assemblyDependencies);
+                    graph.AddVertices(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
                 }
                 else
                 {
                     Console.WriteLine("    Assembly failed to load");
                 }
             }
+            foreach (var v in graph.Vertices)
+                Console.WriteLine("\"" + v.Parent + "\" -> \"" + v.Child + "\" ;");
             Console.ReadLine();
         }
 
