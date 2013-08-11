@@ -20,8 +20,10 @@ namespace EjC.CodeStructure.AD
             var assemblyDependencies = new AssemblyDependencies();
             IGraph<string> graph = new Graph<string>();
             AddAllDependencies(assemblyLoader, assemblyDependencies, graph, assemblyName);
+            Console.WriteLine("digraph g {");
             foreach (var v in graph.Vertices)
                 Console.WriteLine("\"" + v.Parent + "\" -> \"" + v.Child + "\" ;");
+            Console.WriteLine("}");
             Console.ReadLine();
         }
 
@@ -42,7 +44,7 @@ namespace EjC.CodeStructure.AD
             else
             {
                 graph.AddVertices(assemblyName, new List<string>());
-                Console.WriteLine("    Assembly failed to load: {0}", assemblyName);
+                //Console.WriteLine("    Assembly failed to load: {0}", assemblyName);
             }
         }
     }
