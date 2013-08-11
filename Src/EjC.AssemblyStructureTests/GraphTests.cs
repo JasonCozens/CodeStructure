@@ -34,6 +34,34 @@ namespace EjC.AssemblyStructureTests
         }
 
         [TestMethod]
+        public void AddVertices_AddParentTwice_OnlyOneNode()
+        {
+            IGraph<string> graph = new Graph<string>();
+            // Act
+            graph.AddVertices("Parent", new List<string>());
+            graph.AddVertices("Parent", new List<string>());
+            // Assert
+            Assert.AreEqual(1, graph.Nodes.Count());
+            Assert.AreEqual("Parent", graph.Nodes.First());
+            Assert.AreEqual(0, graph.Vertices.Count());
+        }
+
+        [TestMethod]
+        public void AddVertices_AddChildTwice_OnlyOneNode()
+        {
+            IGraph<string> graph = new Graph<string>();
+            // Act
+            graph.AddVertices("ParentX", new List<string>() { "Child" });
+            graph.AddVertices("ParentY", new List<string>() { "Child" });
+            // Assert
+            Assert.AreEqual(3, graph.Nodes.Count());
+            Assert.AreEqual(2, graph.Vertices.Count());
+            Assert.IsTrue(graph.Nodes.Contains("ParentX"));
+            Assert.IsTrue(graph.Nodes.Contains("ParentY"));
+            Assert.IsTrue(graph.Nodes.Contains("Child"));
+        }
+
+        [TestMethod]
         public void AddVertices_OneChild_NodesAndVerticesAreCorrect()
         {
             IGraph<string> graph = new Graph<string>();

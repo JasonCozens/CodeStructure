@@ -40,13 +40,5 @@ namespace EjC.CodeStructure.AD
                 Console.WriteLine("\"" + v.Parent + "\" -> \"" + v.Child + "\" ;");
             Console.ReadLine();
         }
-
-        private static void PrintDependencies(AssemblyDependencies assemblyDependencies)
-        {
-            foreach (var dependency in assemblyDependencies.DirectDependencies)
-            {
-                Console.WriteLine("    {0}", dependency);
-            }
-        }
     }
 }
