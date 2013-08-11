@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EjC.AssemblyStructure
 {
-    public class Vertex<T> : IVertex<T>
+    public class Vertex<T> : IEdge<T>
     {
         public Vertex(T parent, T child)
         {

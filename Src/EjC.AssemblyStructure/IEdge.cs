@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EjC.AssemblyStructure
 {
-    public interface IVertex<T>
+    public interface IEdge<T>
     {
         T Parent { get; }
 

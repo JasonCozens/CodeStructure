@@ -21,7 +21,7 @@ namespace EjC.CodeStructure.AD
             IGraph<string> graph = new Graph<string>();
             AddAllDependencies(assemblyLoader, assemblyDependencies, graph, assemblyName);
             Console.WriteLine("digraph g {");
-            foreach (var v in graph.Vertices)
+            foreach (var v in graph.Edges)
                 Console.WriteLine("\"" + v.Parent + "\" -> \"" + v.Child + "\" ;");
             Console.WriteLine("}");
             Console.ReadLine();
@@ -29,7 +29,7 @@ namespace EjC.CodeStructure.AD
 
         private static void AddAllDependencies(AssemblyLoader assemblyLoader, AssemblyDependencies assemblyDependencies, IGraph<string> graph, string assemblyName)
         {
-            if (graph.Vertices.Select(v => v.Parent).Contains(assemblyName))
+            if (graph.Edges.Select(v => v.Parent).Contains(assemblyName))
                 return;
             assemblyLoader.RefeflectionOnly(assemblyName);
             if (assemblyLoader.AssemblyLoaded)

@@ -10,8 +10,8 @@ namespace EjC.AssemblyStructure
     {
         void AddVertices(T parent, IEnumerable<T> children);
 
-        IEnumerable<T> Nodes { get; }
+        IEnumerable<T> Vertices { get; }
 
-        IEnumerable<IVertex<T>> Vertices { get; }
+        IEnumerable<IEdge<T>> Edges { get; }
     }
 }

@@ -34,12 +34,12 @@ namespace EjC.AssemblyStructure
                 _nodes.Add(node);
         }
 
-        public IEnumerable<T> Nodes
+        public IEnumerable<T> Vertices
         {
             get { return  _nodes; }
         }
 
-        public IEnumerable<IVertex<T>> Vertices
+        public IEnumerable<IEdge<T>> Edges
         {
             get { return _graph; }
         }

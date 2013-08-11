@@ -17,8 +17,8 @@ namespace EjC.AssemblyStructureTests
             // Act
             IGraph<string> graph = new Graph<string>();
             // Assert
-            Assert.AreEqual(0, graph.Nodes.Count());
             Assert.AreEqual(0, graph.Vertices.Count());
+            Assert.AreEqual(0, graph.Edges.Count());
         }
 
         [TestMethod]
@@ -28,9 +28,9 @@ namespace EjC.AssemblyStructureTests
             // Act
             graph.AddVertices("Parent", new List<string>());
             // Assert
-            Assert.AreEqual(1, graph.Nodes.Count());
-            Assert.AreEqual("Parent", graph.Nodes.First());
-            Assert.AreEqual(0, graph.Vertices.Count());
+            Assert.AreEqual(1, graph.Vertices.Count());
+            Assert.AreEqual("Parent", graph.Vertices.First());
+            Assert.AreEqual(0, graph.Edges.Count());
         }
 
         [TestMethod]
@@ -41,9 +41,9 @@ namespace EjC.AssemblyStructureTests
             graph.AddVertices("Parent", new List<string>());
             graph.AddVertices("Parent", new List<string>());
             // Assert
-            Assert.AreEqual(1, graph.Nodes.Count());
-            Assert.AreEqual("Parent", graph.Nodes.First());
-            Assert.AreEqual(0, graph.Vertices.Count());
+            Assert.AreEqual(1, graph.Vertices.Count());
+            Assert.AreEqual("Parent", graph.Vertices.First());
+            Assert.AreEqual(0, graph.Edges.Count());
         }
 
         [TestMethod]
@@ -54,11 +54,11 @@ namespace EjC.AssemblyStructureTests
             graph.AddVertices("ParentX", new List<string>() { "Child" });
             graph.AddVertices("ParentY", new List<string>() { "Child" });
             // Assert
-            Assert.AreEqual(3, graph.Nodes.Count());
-            Assert.AreEqual(2, graph.Vertices.Count());
-            Assert.IsTrue(graph.Nodes.Contains("ParentX"));
-            Assert.IsTrue(graph.Nodes.Contains("ParentY"));
-            Assert.IsTrue(graph.Nodes.Contains("Child"));
+            Assert.AreEqual(3, graph.Vertices.Count());
+            Assert.AreEqual(2, graph.Edges.Count());
+            Assert.IsTrue(graph.Vertices.Contains("ParentX"));
+            Assert.IsTrue(graph.Vertices.Contains("ParentY"));
+            Assert.IsTrue(graph.Vertices.Contains("Child"));
         }
 
         [TestMethod]
@@ -68,11 +68,11 @@ namespace EjC.AssemblyStructureTests
             // Act
             graph.AddVertices("Parent", new List<string>() { "Child" } );
             // Assert
-            Assert.AreEqual(2, graph.Nodes.Count());
-            Assert.IsTrue(graph.Nodes.Contains("Parent"));
-            Assert.IsTrue(graph.Nodes.Contains("Child"));
-            var vertex = graph.Vertices.First();
-            Assert.AreEqual(1, graph.Vertices.Count());
+            Assert.AreEqual(2, graph.Vertices.Count());
+            Assert.IsTrue(graph.Vertices.Contains("Parent"));
+            Assert.IsTrue(graph.Vertices.Contains("Child"));
+            var vertex = graph.Edges.First();
+            Assert.AreEqual(1, graph.Edges.Count());
             Assert.AreEqual("Parent", vertex.Parent);
             Assert.AreEqual("Child", vertex.Child);
         }
