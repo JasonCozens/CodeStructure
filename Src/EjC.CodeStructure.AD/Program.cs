@@ -19,26 +19,31 @@ namespace EjC.CodeStructure.AD
             var assemblyLoader = new AssemblyLoader();
             var assemblyDependencies = new AssemblyDependencies();
             IGraph<string> graph = new Graph<string>();
-
-            assemblyLoader.RefeflectionOnly(assemblyName);
-            assemblyDependencies.Analyse(assemblyLoader.Assembly);
-            graph.AddVertices(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
-            foreach (var dependency in assemblyDependencies.DirectDependencies)
-            {
-                assemblyLoader.RefeflectionOnly(dependency);
-                if (assemblyLoader.AssemblyLoaded)
-                {
-                    assemblyDependencies.Analyse(assemblyLoader.Assembly);
-                    graph.AddVertices(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
-                }
-                else
-                {
-                    Console.WriteLine("    Assembly failed to load");
-                }
-            }
+            AddAllDependencies(assemblyLoader, assemblyDependencies, graph, assemblyName);
             foreach (var v in graph.Vertices)
                 Console.WriteLine("\"" + v.Parent + "\" -> \"" + v.Child + "\" ;");
             Console.ReadLine();
+        }
+
+        private static void AddAllDependencies(AssemblyLoader assemblyLoader, AssemblyDependencies assemblyDependencies, IGraph<string> graph, string assemblyName)
+        {
+            if (graph.Vertices.Select(v => v.Parent).Contains(assemblyName))
+                return;
+            assemblyLoader.RefeflectionOnly(assemblyName);
+            if (assemblyLoader.AssemblyLoaded)
+            {
+                assemblyDependencies.Analyse(assemblyLoader.Assembly);
+                graph.AddVertices(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
+                foreach (var dependency in assemblyDependencies.DirectDependencies)
+                {
+                    AddAllDependencies(assemblyLoader, assemblyDependencies, graph, dependency);
+                }
+            }
+            else
+            {
+                graph.AddVertices(assemblyName, new List<string>());
+                Console.WriteLine("    Assembly failed to load: {0}", assemblyName);
+            }
         }
     }
 }
