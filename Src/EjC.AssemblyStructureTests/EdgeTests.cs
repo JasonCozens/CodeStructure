@@ -9,16 +9,16 @@ using EjC.AssemblyStructure;
 namespace EjC.AssemblyStructureTests
 {
     [TestClass]
-    public class VertexTests
+    public class EdgeTests
     {
         [TestMethod]
-        public void NewVertex_ParentChildAreCorrect()
+        public void NewEdge_ParentChildAreCorrect()
         {
             // Act
-            var vertex = new Edge<string>("Parent", "Child");
+            var edge = new Edge<string>("Parent", "Child");
             // Assert
-            Assert.AreEqual("Parent", vertex.Parent);
-            Assert.AreEqual("Child", vertex.Child);
+            Assert.AreEqual("Parent", edge.Parent);
+            Assert.AreEqual("Child", edge.Child);
         }
     }
 }
