@@ -28,9 +28,23 @@ namespace EjC.AssemblyStructureTests
         }
 
         [TestMethod]
+        public void ReflectionLoad_EmptyString_ThrowsNullArgumentException()
+        {
+            // Arrange
+            IAssemblyLoader assemblyLoader = new AssemblyLoader();
+            // Act
+            try
+            {
+                assemblyLoader.RefeflectionOnly("");
+                Assert.Fail("No exception thrown");
+            }
+            catch (ArgumentNullException) { }
+        }
+
+        [TestMethod]
         public void ReflectionLoad_FileNotFound_AssemblyLoadedIsFalse()
         {
-            // Arrange.
+            // Arrange
             IAssemblyLoader assemblyLoader = new AssemblyLoader();
             // Act
             assemblyLoader.RefeflectionOnly("XXX");
