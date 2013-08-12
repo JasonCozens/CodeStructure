@@ -11,6 +11,36 @@ namespace EjC.AssemblyStructureTests
     [TestClass]
     public class EdgeTests
     {
+        private const string NoExceptionThrownMessage = "No exception thrown.";
+
+        [TestMethod]
+        public void Newedge_ParentIsNull_ThrowsArgumentNullException()
+        {
+            try
+            {
+                new Edge<string>(null, "child");
+                Assert.Fail(NoExceptionThrownMessage);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual("parent", ex.ParamName);
+            }
+        }
+
+        [TestMethod]
+        public void Newedge_ChildIsNull_ThrowsArgumentNullException()
+        {
+            try
+            {
+                new Edge<string>("parent", null);
+                Assert.Fail(NoExceptionThrownMessage);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Assert.AreEqual("child", ex.ParamName);
+            }
+        }
+
         [TestMethod]
         public void NewEdge_ParentChildAreCorrect()
         {

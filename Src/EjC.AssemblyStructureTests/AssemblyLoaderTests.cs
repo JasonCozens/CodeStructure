@@ -28,7 +28,7 @@ namespace EjC.AssemblyStructureTests
         }
 
         [TestMethod]
-        public void ReflectionLoad_EmptyString_ThrowsNullArgumentException()
+        public void ReflectionLoad_EmptyString_ThrowsArgumentNullException()
         {
             // Arrange
             IAssemblyLoader assemblyLoader = new AssemblyLoader();
