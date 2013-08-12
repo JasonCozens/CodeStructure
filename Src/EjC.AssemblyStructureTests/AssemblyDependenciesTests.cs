@@ -16,6 +16,20 @@ namespace EjC.AssemblyStructureTests
     public class AssemblyDependenciesTests
     {
         [TestMethod]
+        public void Analyse_NullArgument_ThrowsException()
+        {
+            // Arrange
+            IAssemblyDependencies assemblyDepencies = new AssemblyDependencies();
+            // Act
+            try
+            {
+                assemblyDepencies.Analyse(null);
+                Assert.Fail("No exception thrown.");
+            }
+            catch (ArgumentNullException) { }
+        }
+
+        [TestMethod]
         public void Analyse_AssemblyWithNoReferencies_HasNoDirectDependencies()
         {
             // Arrange

@@ -26,7 +26,7 @@ namespace EjC.AssemblyStructureTests
         {
             IGraph<string> graph = new Graph<string>();
             // Act
-            graph.AddVertices("Parent", new List<string>());
+            graph.AddEdges("Parent", new List<string>());
             // Assert
             Assert.AreEqual(1, graph.Vertices.Count());
             Assert.AreEqual("Parent", graph.Vertices.First());
@@ -38,8 +38,8 @@ namespace EjC.AssemblyStructureTests
         {
             IGraph<string> graph = new Graph<string>();
             // Act
-            graph.AddVertices("Parent", new List<string>());
-            graph.AddVertices("Parent", new List<string>());
+            graph.AddEdges("Parent", new List<string>());
+            graph.AddEdges("Parent", new List<string>());
             // Assert
             Assert.AreEqual(1, graph.Vertices.Count());
             Assert.AreEqual("Parent", graph.Vertices.First());
@@ -51,8 +51,8 @@ namespace EjC.AssemblyStructureTests
         {
             IGraph<string> graph = new Graph<string>();
             // Act
-            graph.AddVertices("ParentX", new List<string>() { "Child" });
-            graph.AddVertices("ParentY", new List<string>() { "Child" });
+            graph.AddEdges("ParentX", new List<string>() { "Child" });
+            graph.AddEdges("ParentY", new List<string>() { "Child" });
             // Assert
             Assert.AreEqual(3, graph.Vertices.Count());
             Assert.AreEqual(2, graph.Edges.Count());
@@ -66,7 +66,7 @@ namespace EjC.AssemblyStructureTests
         {
             IGraph<string> graph = new Graph<string>();
             // Act
-            graph.AddVertices("Parent", new List<string>() { "Child" } );
+            graph.AddEdges("Parent", new List<string>() { "Child" } );
             // Assert
             Assert.AreEqual(2, graph.Vertices.Count());
             Assert.IsTrue(graph.Vertices.Contains("Parent"));

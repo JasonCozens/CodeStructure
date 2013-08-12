@@ -9,39 +9,39 @@ namespace EjC.AssemblyStructure
 {
     public class Graph<T> : IGraph<T>
     {
-        private ConcurrentBag<Vertex<T>> _graph;
-        private ConcurrentBag<T> _nodes;
+        private ConcurrentBag<Edge<T>> _edges;
+        private ConcurrentBag<T> _vertices;
 
         public Graph()
         {
-            _nodes = new ConcurrentBag<T>();
-            _graph = new ConcurrentBag<Vertex<T>>();
+            _vertices = new ConcurrentBag<T>();
+            _edges = new ConcurrentBag<Edge<T>>();
         }
 
-        public void AddVertices(T parent, IEnumerable<T> children)
+        public void AddEdges(T parent, IEnumerable<T> children)
         {
             AddNodeIfNew(parent);
             foreach (var child in children)
             {
                 AddNodeIfNew(child);
-                _graph.Add(new Vertex<T>(parent, child));
+                _edges.Add(new Edge<T>(parent, child));
             }
         }
 
         private void AddNodeIfNew(T node)
         {
-            if (!_nodes.Contains(node))
-                _nodes.Add(node);
+            if (!_vertices.Contains(node))
+                _vertices.Add(node);
         }
 
         public IEnumerable<T> Vertices
         {
-            get { return  _nodes; }
+            get { return  _vertices; }
         }
 
         public IEnumerable<IEdge<T>> Edges
         {
-            get { return _graph; }
+            get { return _edges; }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace EjC.CodeStructure.AD
             if (assemblyLoader.AssemblyLoaded)
             {
                 assemblyDependencies.Analyse(assemblyLoader.Assembly);
-                graph.AddVertices(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
+                graph.AddEdges(assemblyLoader.Name, assemblyDependencies.DirectDependencies);
                 foreach (var dependency in assemblyDependencies.DirectDependencies)
                 {
                     AddAllDependencies(assemblyLoader, assemblyDependencies, graph, dependency);
@@ -43,7 +43,7 @@ namespace EjC.CodeStructure.AD
             }
             else
             {
-                graph.AddVertices(assemblyName, new List<string>());
+                graph.AddEdges(assemblyName, new List<string>());
                 //Console.WriteLine("    Assembly failed to load: {0}", assemblyName);
             }
         }

@@ -8,7 +8,7 @@ namespace EjC.AssemblyStructure
 {
     public interface IGraph<T>
     {
-        void AddVertices(T parent, IEnumerable<T> children);
+        void AddEdges(T parent, IEnumerable<T> children);
 
         IEnumerable<T> Vertices { get; }
 

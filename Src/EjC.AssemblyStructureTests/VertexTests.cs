@@ -15,7 +15,7 @@ namespace EjC.AssemblyStructureTests
         public void NewVertex_ParentChildAreCorrect()
         {
             // Act
-            var vertex = new Vertex<string>("Parent", "Child");
+            var vertex = new Edge<string>("Parent", "Child");
             // Assert
             Assert.AreEqual("Parent", vertex.Parent);
             Assert.AreEqual("Child", vertex.Child);

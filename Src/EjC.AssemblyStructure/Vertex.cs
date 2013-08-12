@@ -5,9 +5,9 @@ using System.Text;
 
 namespace EjC.AssemblyStructure
 {
-    public class Vertex<T> : IEdge<T>
+    public class Edge<T> : IEdge<T>
     {
-        public Vertex(T parent, T child)
+        public Edge(T parent, T child)
         {
             if (parent == null) throw new ArgumentNullException("parent");
             if (child == null) throw new ArgumentNullException("child");
